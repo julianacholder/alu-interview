@@ -1,27 +1,21 @@
 #!/usr/bin/python3
-'''
-Given a number n, write a method that calculates
-the fewest number of operations needed to result in
-exactly n H characters in the file.
-'''
+'''Minimum Operations'''
 
 
-def minOperations(n):
+def minOperations(n, result=0):
+    ''' Returns the minimum number of operations to reach n characters
     '''
-    returns min operations to get n Hs
-    '''
-    operations = 0
     if n <= 1:
-        return 0
-    for i in range(2, n + 1):
-        '''
-        check if n could be broken into smaller parts
-        '''
-        while n % i == 0:
-            ''' reduce n into a smaller part '''
-            n = n / i
-            '''
-            if so add the nbr of smaller parts (in fact 1 copy and 4 paste)
-            '''
-            operations += i
-    return operations
+        return (0)
+    elif n <= 3:
+        return (n)
+    hcf = get_hcf(n)
+    return minOperations(hcf) + (n // hcf)
+
+
+def get_hcf(num: int) -> int:
+    '''Returns the highest common factor of num
+    '''
+    for i in range(num // 2, 0, -1):
+        if num % i == 0:
+            return (i)
